@@ -1,0 +1,111 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main.html}">
+<body>
+    <div layout:fragment="custom-content">
+        <br>
+        <div class="card">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" th:text="${detailsFolder.getName()}"></h5>
+                <button type="button" class="btn btn-white"  data-bs-toggle="modal" data-bs-target="#exampleModalCat">
+                    <strong> + ADD CATEGORY</strong>
+                </button>
+
+                <div class="modal fade" id="exampleModalCat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel2">ADD CATEGORY</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+<!--                            <form th:action="@{'/addTask/'+${detailsFolder.getId()}}" method="post">-->
+<!--                                <div class="modal-body">-->
+<!--                                    <div class="mb-3">-->
+<!--                                        <label class="form-label">TASK NAME:</label>-->
+<!--                                        <input type="text" class="form-control" name="taskName">-->
+<!--                                    </div>-->
+<!--                                    <div class="mb-3">-->
+<!--                                        <label class="form-label">TASK DESCRIPTION:</label>-->
+<!--                                        <textarea class="form-control" name="taskDesc">-->
+
+<!--                                </textarea>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="modal-footer">-->
+<!--                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                                    <button type="submit" class="btn btn-primary">Save</button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-primary">UPDATE</button>
+                <button class="btn btn-danger">DELETE</button>
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-white" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <strong> + NEW TASK</strong>
+        </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ADD TASK</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form th:action="@{'/addTask/'+${detailsFolder.getId()}}" method="post">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">TASK NAME:</label>
+                                <input type="text" class="form-control" name="taskName">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">TASK DESCRIPTION:</label>
+                                <textarea class="form-control" name="taskDesc">
+
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+<br><br>
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TASK NAME</th>
+                    <th>STATUS</th>
+                    <th width="13%">DETAILS</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task:${allTaskByFolder}">
+                <td th:text="${task.getId()}"></td>
+                <td th:text="${task.getTitle()}"></td>
+                <td th:if="${task.getStatus()==0}" th:text="'TO DO'" style="color: darkblue"></td>
+                <td th:if="${task.getStatus()==3}" th:text="'TO bfgbfgDO'" style="color: darkblue"></td>
+
+                <td>
+                    <a th:href="@{'/folders/detailsFolder/detailsTask/'+${task.getId()}}" class="btn btn-primary">VIEW MORE</a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</body>
+</html>
